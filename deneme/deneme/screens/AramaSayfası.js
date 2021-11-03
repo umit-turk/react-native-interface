@@ -1,16 +1,29 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {View, Text, SafeAreaView, ScrollView, Image} from 'react-native';
+import React, { useState } from 'react';
+import {View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, Modal, ImageBackground, StyleSheet} from 'react-native';
 import {COLORS, FONTS} from '../constants/theme';
 import HeaderSearch from '../components/HeaderSearch';
 import {MapPin} from '../Icons';
 import Kisiler from '../components/Kisiler';
+import ModalPicker from '../components/ModalPicker';
 
 const AramaSayfası = () => {
   const navigtion = useNavigation();
 
+  const changeModalVisiblity = (bool) => {
+    setVisible(bool)
+} 
+
+const [visible, setVisible] = useState(false)
+const [chooseData, setChooseData] = useState("Select Item...")
+
+const setData = (option) => {
+  setChooseData(option)
+}
+
   return (
-    <View style={{flex: 1}}>
+    <View  style={styles.container}>
+ 
       <HeaderSearch />
       <ScrollView>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -28,7 +41,8 @@ const AramaSayfası = () => {
             Kişiler (3)
           </Text>
           {/* Lokasyon */}
-          <View
+          <TouchableOpacity
+          onPress={() => changeModalVisiblity(true)}
             style={{
               flexDirection: 'row',
               marginRight: 20,
@@ -53,9 +67,42 @@ const AramaSayfası = () => {
                 fontSize: 14,
                 color: COLORS.white,
               }}>
-              İstanbul
+              {chooseData}
             </Text>
-          </View>
+          </TouchableOpacity>
+          <Modal
+           transparent={true}
+           animationType="fade"
+           visible={visible}
+           nRequestClose={() => changeModalVisiblity(false)}
+           >
+         
+
+          
+
+             <View
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          backgroundColor: 'rgba(19, 20, 65, 0,2)',
+          padding: 20,
+        }}
+      >
+       
+      
+
+         <ModalPicker 
+             changeModalVisiblity={changeModalVisiblity}
+             setData={setData}
+             />
+      </View>
+
+
+           </Modal>
+           
+
         </View>
         {/* Kişiler komponenti */}
        <Kisiler />
@@ -63,5 +110,18 @@ const AramaSayfası = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex:1
+  },
+  absolute: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0
+  }
+});
+
 
 export default AramaSayfası;

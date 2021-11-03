@@ -1,7 +1,49 @@
 import React from 'react';
 import {View} from 'react-native';
-import Svg, {Path, G, Defs, Rect, ClipPath} from 'react-native-svg';
-import {COLORS} from './constants/theme';
+import Svg, {
+  Path,
+  G,
+  Defs,
+  Rect,
+  ClipPath,
+  Stop,
+  LinearGradient,
+} from 'react-native-svg';
+import {COLORS, SIZES} from './constants/theme';
+
+
+
+export const Rect1 = () => {
+  return (
+    <Svg
+      style={{position: 'absolute',right:0}}
+      width={SIZES.width * 0.7}
+      height={SIZES.height * 0.3}
+      viewBox="0 0 273 272"
+      fill="none">
+      <Rect
+        x="144.637"
+        y="-146.787"
+        width="398.606"
+        height="204.591"
+        transform="rotate(45 144.637 -146.787)"
+        fill="url(#paint0_linear_154:7064)"
+      />
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_154:7064"
+          x1="209.169"
+          y1="-21.795"
+          x2="391.821"
+          y2="-31.6041"
+          gradientUnits="userSpaceOnUse">
+          <Stop stopColor="rgba(233, 241, 255, 0.6)" stopOpacity="0.6" />
+          <Stop offset="1" stopColor="rgba(233, 241, 255, 0.08)" stopOpacity="0.08" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+  );
+};
 
 export const ArrowRightCircle = ({color}) => {
   return (

@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {COLORS, SIZES} from '../constants/theme';
 import {SearchUser, InputSearch} from '../Icons';
@@ -19,7 +20,7 @@ const HeaderBar = () => {
   }
 
   return (
-    <SafeAreaView style={{height: 124, backgroundColor: COLORS.blue}}>
+    <SafeAreaView style={{height: Platform.OS === "ios" ? 124 : 84, backgroundColor: COLORS.blue}}>
       <StatusBar barStyle="light-content" />
       <View
         style={{
